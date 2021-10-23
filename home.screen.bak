@@ -1,0 +1,44 @@
+  <ScrollView
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+      >
+        {Locations.map((location, index) => {
+          let bgImg;
+          if (location.weatherType == "Sunny")
+            bgImg = require("../../assets/sunny.jpg");
+          if (location.weatherType == "Night")
+            bgImg = require("../../assets/night2.jpg");
+          if (location.weatherType == "Cloudy")
+            bgImg = require("../../assets/cloudy.jpeg");
+          if (location.weatherType == "Rainy")
+            bgImg = require("../../assets/rainy.jpg");
+
+          return (
+            <View
+              key={index}
+              style={{ height: windowHeight, width: windowWidth }}
+            >
+              <ImageBackground
+                style={{ flex: 1 }}
+                source={require("../../assets/sunny.jpg")}
+              >
+                <View
+                  style={{
+                    flex: 1,
+                    padding: 20,
+                    backgroundColor: "rgba(0,0,0,0.2)",
+                  }}
+                >
+                  {/* TopInfoWrapper */}
+                  <TopInfoWrapper location={location} />
+                  {/* Seperator */}
+                  <SeperatorComponent />
+                  {/* BottomWrapper */}
+                  <BottomInfoWrapper location={location} />
+                </View>
+              </ImageBackground>
+            </View>
+          );
+        })}
+      </ScrollView>

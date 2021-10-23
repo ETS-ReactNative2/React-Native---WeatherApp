@@ -1,0 +1,103 @@
+ <View style={{ height: windowHeight - 50, width: windowWidth }}>
+        <ImageBackground
+          style={{ flex: 1 }}
+          source={require("../../assets/sunny.jpg")}
+        >
+          <View
+            style={{
+              flex: 1,
+              padding: 20,
+              backgroundColor: "rgba(0,0,0,0.4)",
+            }}
+          >
+            {/* TopInfoWrapper */}
+            <View style={styles.topInfoWrapper}>
+              <View>
+                <Text style={styles.city}>{location.city}</Text>
+                <Text style={styles.time}>{location.dateTime}</Text>
+              </View>
+
+              <View>
+                <Text style={styles.temperature}>{location.temparature}</Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image
+                    style={{ width: 100, height: 100 }}
+                    resizeMode="contain"
+                    source={{
+                      uri: "http://openweathermap.org/img/wn/10d@2x.png",
+                    }}
+                  />
+                  <Text style={styles.weatherType}>{location.weatherType}</Text>
+                </View>
+              </View>
+            </View>
+            {/* Seperator */}
+            <View
+              style={{
+                borderBottomColor: "rgba(255,255,255,0.7)",
+                borderBottomWidth: 1,
+                marginTop: 20,
+              }}
+            />
+            {/* BottomWrapper */}
+            <BottomInfoWrapper location={location} />
+          </View>
+        </ImageBackground>
+      </View>
+
+      <View style={{ height: windowHeight - 50, width: windowWidth }}>
+        <ImageBackground
+          style={{ flex: 1 }}
+          source={require("../../assets/sunny.jpg")}
+        >
+          <View
+            style={{
+              flex: 1,
+              padding: 20,
+              backgroundColor: "rgba(0,0,0,0.4)",
+            }}
+          >
+            {/* TopInfoWrapper */}
+            <View style={styles.topInfoWrapper}>
+              <View>
+                <Text style={styles.city}>{location.city}</Text>
+                <Text style={styles.time}>{location.dateTime}</Text>
+              </View>
+
+              <View>
+                <Text style={styles.temperature}>{location.temparature}</Text>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image
+                    style={{ width: 100, height: 100 }}
+                    resizeMode="contain"
+                    source={{
+                      uri: "http://openweathermap.org/img/wn/10d@2x.png",
+                    }}
+                  />
+                  <Text style={styles.weatherType}>{location.weatherType}</Text>
+                </View>
+              </View>
+            </View>
+            {/* Seperator */}
+            <View
+              style={{
+                borderBottomColor: "rgba(255,255,255,0.7)",
+                borderBottomWidth: 1,
+                marginTop: 20,
+              }}
+            />
+            {/* BottomWrapper */}
+            <BottomInfoWrapper location={location} />
+          </View>
+        </ImageBackground>
+      </View>
