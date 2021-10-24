@@ -49,6 +49,7 @@ npm start
 
 ##### All Countries Weather
 ![All Countries Weather](./screenshots/6.png "All Countries Weather")
+![All Countries Weather type2](./screenshots/7.png "All Countries Weather type2")
 
 ## Development
 
