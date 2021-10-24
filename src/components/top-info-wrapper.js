@@ -1,21 +1,7 @@
 import React, { useContext } from "react";
 import { Image, StyleSheet, Text, View } from "react-native";
-import SunIcon from "../../assets/sun.svg";
-import CloudIcon from "../../assets/cloudy.svg";
-import MoonIcon from "../../assets/moon.svg";
-import RainIcon from "../../assets/rain.svg";
 import { WeatherContext } from "../context/weather.context";
-
-const WeatherIcon = (weatherType) => {
-  if (weatherType == "Sunny")
-    return <SunIcon height={34} width={34} fill="#fff" />;
-  if (weatherType == "Cloudy")
-    return <CloudIcon height={34} width={34} fill="#fff" />;
-  if (weatherType == "Rainy")
-    return <RainIcon height={34} width={34} fill="#fff" />;
-  if (weatherType == "Night")
-    return <MoonIcon height={34} width={34} fill="#fff" />;
-};
+import getWeatherIcon from "../helpers/get-weather-icon";
 
 const TopInfoWrapper = ({ location, allCountries = false, item = null }) => {
   const { temperature, name, dateTime, icon, weatherResult } =
@@ -61,15 +47,21 @@ const TopInfoWrapper = ({ location, allCountries = false, item = null }) => {
         >
           {icon ? (
             <Image
-              style={{ width: 100, height: 100 }}
+              style={styles.iconContainer}
               resizeMode="contain"
-              source={{ uri: allCountries ? `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png` : icon }}
+              source={{
+                uri: allCountries
+                  ? `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+                  : icon,
+              }}
             />
           ) : (
-            WeatherIcon(location.weatherType)
+            getWeatherIcon(location.weatherType)
           )}
           <Text style={styles.weatherType}>
-            {allCountries ?  item.weather[0].main : weatherResult
+            {allCountries
+              ? item.weather[0].main
+              : weatherResult
               ? weatherResult.weather[0].main
               : location.weatherType}
           </Text>
@@ -108,6 +100,10 @@ const styles = StyleSheet.create({
     lineHeight: 34,
     marginLeft: 10,
     fontWeight: "bold",
+  },
+  iconContainer: {
+    width: 100,
+    height: 100,
   },
 });
 

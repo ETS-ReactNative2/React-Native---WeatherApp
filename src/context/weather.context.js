@@ -4,6 +4,7 @@ import { calculateDateTimeFromUnix } from "../helpers/calculate-date-time-from-u
 import { ConvertMeterPerSecondsToKilometerPerHours } from "../helpers/convert-mps-to-kph";
 import { setBackgroundImageFromCondition } from "../helpers/set-background-image-from-condition";
 import { countriesData } from "../../assets/data/countriesData";
+import { getAllWeather } from "../helpers/download-all-countries-data";
 export const WeatherContext = createContext();
 
 export const WeatherContextProvider = ({ children }) => {
@@ -20,6 +21,7 @@ export const WeatherContextProvider = ({ children }) => {
   const [latitude, setLatitude] = useState(45.7869);
   const [longitude, setLongitude] = useState(-87.9037);
   const [countryCode, setCountryCode] = useState("NO");
+  const [allCountriesWeather, setAllCountriesWeather] = useState([]);
 
   const setWeather = async (location) => {
     setError(null);
@@ -85,6 +87,8 @@ export const WeatherContextProvider = ({ children }) => {
         setWeather,
         error,
         setError,
+        setAllCountriesWeather,
+        allCountriesWeather,
       }}
     >
       {children}

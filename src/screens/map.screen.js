@@ -42,25 +42,8 @@ const MapScreen = () => {
         onSubmitEditing={submitHandler}
       />
       {error ? (
-        <View
-          style={{
-            zIndex: 999999,
-            position: "absolute",
-            textAlign: "center",
-            width: "100%",
-            backgroundColor: "#ea685f",
-          }}
-        >
-          <Text
-            style={{
-              fontSize: 18,
-              zIndex: 9999,
-              textAlign: "center",
-              color: "white",
-            }}
-          >
-            {error}
-          </Text>
+        <View style={errorViewContainer}>
+          <Text style={errorText}>{error}</Text>
         </View>
       ) : (
         <View
@@ -96,31 +79,15 @@ const MapScreen = () => {
           }}
         >
           <MapView.Callout tooltip={true}>
-            <View
-              style={{
-                height: 150,
-                width: 120,
-                padding: 10,
-                alignItems: "center",
-                maxHeight: 120,
-                borderRadius: 25,
-                backgroundColor: "gray",
-              }}
-            >
+            <View style={styles.mapCalloutViewContainer}>
               <WebView
-                style={{
-                  height: 52,
-                  width: 100,
-                  backgroundColor: "white",
-                }}
+                style={styles.webView}
                 source={{
                   uri: flag ? flag : "https://flagcdn.com/w320/ht.png",
                 }}
               />
-              <Text style={{ color: "white", fontWeight: "bold" }}>
-                {name ? name : "Norway"}
-              </Text>
-              <Text style={{ fontWeight: "bold", color: "white" }}>
+              <Text style={styles.nameText}>{name ? name : "Norway"}</Text>
+              <Text style={styles.tempText}>
                 Temp: {temperature ? `${temperature}\u2103` : "27\u2103"}
               </Text>
             </View>
@@ -141,6 +108,41 @@ const styles = StyleSheet.create({
   },
   map: {
     flex: 1,
+  },
+  errorViewContainer: {
+    zIndex: 999999,
+    position: "absolute",
+    textAlign: "center",
+    width: "100%",
+    backgroundColor: "#ea685f",
+  },
+  errorText: {
+    fontSize: 18,
+    zIndex: 9999,
+    textAlign: "center",
+    color: "white",
+  },
+  mapCalloutViewContainer: {
+    height: 150,
+    width: 120,
+    padding: 10,
+    alignItems: "center",
+    maxHeight: 120,
+    borderRadius: 25,
+    backgroundColor: "gray",
+  },
+  webView: {
+    height: 52,
+    width: 100,
+    backgroundColor: "white",
+  },
+  nameText: {
+    color: "white",
+    fontWeight: "bold",
+  },
+  tempText: {
+    fontWeight: "bold",
+    color: "white",
   },
 });
 

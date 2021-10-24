@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import {
   Text,
   View,
@@ -16,10 +16,14 @@ import SeperatorComponent from "../components/seperator.component";
 import BottomInfoWrapper from "../components/bottom-info-wrapper.component";
 import TopInfoWrapper from "../components/top-info-wrapper";
 import { ActivityIndicator, Colors } from "react-native-paper";
+import { AntDesign } from "@expo/vector-icons";
+import { WeatherContext } from "../context/weather.context";
 
 const AllCountriesScreen = () => {
+  const { allCountriesWeather } = useContext(WeatherContext);
   const { width: windowWidth, height: windowHeight } = useWindowDimensions();
   const [weatherResult, setWeatherResult] = useState([]);
+  const [visible, setVisible] = useState(true);
   const location = Locations[0];
 
   const getWeatherDetails = async () => {
@@ -31,7 +35,10 @@ const AllCountriesScreen = () => {
 
   const DATA = [];
 
-  const getItem = (_, index) => allCountriesData[index];
+  const getItem = (_, index) =>
+    allCountriesWeather.length > 1
+      ? allCountriesWeather[index]
+      : allCountriesData[index];
 
   useEffect(() => {
     getWeatherDetails();
@@ -51,6 +58,7 @@ const AllCountriesScreen = () => {
         <VirtualizedList
           horizontal
           pagingEnabled
+          onScrollBeginDrag={() => setVisible(false)}
           initialNumToRender={2}
           getItemCount={getItemCount}
           getItem={getItem}
@@ -69,13 +77,7 @@ const AllCountriesScreen = () => {
                   style={{ flex: 1 }}
                   source={bgImage ? bgImage : require("../../assets/sunny.jpg")}
                 >
-                  <View
-                    style={{
-                      flex: 1,
-                      padding: 20,
-                      backgroundColor: "rgba(0,0,0,0.4)",
-                    }}
-                  >
+                  <View style={styles.infoContainer}>
                     {/* TopInfoWrapper */}
                     <TopInfoWrapper
                       location={location}
@@ -92,6 +94,18 @@ const AllCountriesScreen = () => {
                     />
                   </View>
                 </ImageBackground>
+                <View style={styles.swipeIconContainer(visible)}>
+                  <AntDesign name="doubleright" size={50} color="white" />
+                </View>
+                <View style={styles.swipeContainer(visible)}>
+                  <Text style={styles.swipeText}>Please Swipe</Text>
+                </View>
+                <View style={styles.betaContainer(visible)}>
+                  <Text style={styles.betaText}>
+                    This is in beta stage. Download the data from the 'More'
+                    section for the updated data.
+                  </Text>
+                </View>
               </View>
             );
           }}
@@ -100,5 +114,39 @@ const AllCountriesScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  infoContainer: {
+    flex: 1,
+    padding: 20,
+    backgroundColor: "rgba(0,0,0,0.4)",
+  },
+  betaText: {
+    textAlign: "center",
+    fontSize: 20,
+    color: "white",
+  },
+  betaContainer: (visible) => ({
+    position: "absolute",
+    top: "17%",
+    opacity: visible ? 1 : 0,
+  }),
+  swipeText: {
+    fontSize: 30,
+    color: "white",
+  },
+  swipeContainer: (visible) => ({
+    position: "absolute",
+    left: "25%",
+    top: "10%",
+    opacity: visible ? 1 : 0,
+  }),
+  swipeIconContainer: (visible) => ({
+    position: "absolute",
+    right: 20,
+    top: "10%",
+    opacity: visible ? 1 : 0,
+  }),
+});
 
 export default AllCountriesScreen;

@@ -1,21 +1,13 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { StatusBar, Text } from "react-native";
-import {
-  ImageBackground,
-  ScrollView,
-  StyleSheet,
-  useWindowDimensions,
-  View,
-} from "react-native";
+import React, { useContext, useState } from "react";
+import { StatusBar } from "react-native";
+import { ImageBackground, useWindowDimensions, View } from "react-native";
 import { useFonts } from "expo-font";
 import Locations from "../../model/locations";
-import { WeatherForecastRequest } from "../api/openweatherapi";
 import SearchLocationInput from "../components/search-location-input.component";
 import BottomInfoWrapper from "../components/bottom-info-wrapper.component";
 import SeperatorComponent from "../components/seperator.component";
 import TopInfoWrapper from "../components/top-info-wrapper";
 import { WeatherContext } from "../context/weather.context";
-import { Portal } from "react-native-paper";
 
 export default function HomeScreen() {
   const { setWeather, backgroundImage } = useContext(WeatherContext);

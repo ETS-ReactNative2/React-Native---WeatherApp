@@ -1,24 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FlatList, Image, ScrollView, Text, View } from "react-native";
-import {
-  DataTable,
-  Searchbar,
-  ActivityIndicator,
-  Colors,
-} from "react-native-paper";
-import WebView from "react-native-webview";
+import { FlatList, Image, StyleSheet, Text, View } from "react-native";
+import { DataTable, Searchbar, ActivityIndicator } from "react-native-paper";
 import { countriesData } from "../../assets/data/countriesData";
-
-// const CustomView = () => {
-//   return (
-//     <View style={{ backgroundColor: "red" }}>
-//       <WebView
-//         style={{ height: 33, width: 50 }}
-//         source={{ uri: "https://flagcdn.com/w320/in.png" }}
-//       />
-//     </View>
-//   );
-// };
 
 const CountryCodeScreen = () => {
   const [countries, setCountries] = useState([]);
@@ -59,7 +42,7 @@ const CountryCodeScreen = () => {
   }
 
   return (
-    <View style={{ margin: 20 }}>
+    <View style={styles.viewContainer}>
       {/* Searchbar */}
       <Searchbar
         placeholder="Search..."
@@ -68,41 +51,32 @@ const CountryCodeScreen = () => {
       />
       {/* Error Case */}
       {error ? (
-        <Text
-          style={{
-            marginBottom: 20,
-            textAlign: "center",
-            color: "white",
-            backgroundColor: "rgba(202, 39, 7, 0.8)",
-          }}
-        >
-          {error}
-        </Text>
+        <Text style={styles.errorText}>{error}</Text>
       ) : (
         <Text
           style={{
-            marginBottom: 10,
+            marginBottom: 20,
             textAlign: "center",
             color: "white",
           }}
         ></Text>
       )}
 
-      <Text style={{ textAlign: "right" }}>
+      <Text style={styles.totalText}>
         Total:{" "}
         {searchedCountry.length ? searchedCountry.length : countries.length}
       </Text>
       {/* Table */}
-      <DataTable style={{ borderWidth: 1, borderColor: "gray" }}>
+      <DataTable style={styles.tableContainer}>
         <DataTable.Header>
           <DataTable.Title>
-            <Text style={{ fontSize: 16 }}>Country Code</Text>
+            <Text style={styles.tableHeaderTitle1}>Country Code</Text>
           </DataTable.Title>
           <DataTable.Title style={{ justifyContent: "center" }}>
-            <Text style={{ fontSize: 18 }}>Country</Text>
+            <Text style={styles.tableHeaderTitle2}>Country</Text>
           </DataTable.Title>
           <DataTable.Title style={{ justifyContent: "flex-end" }}>
-            <Text style={{ fontSize: 18 }}>Flag</Text>
+            <Text style={styles.tableHeaderTitle3}>Flag</Text>
           </DataTable.Title>
         </DataTable.Header>
 
@@ -113,19 +87,16 @@ const CountryCodeScreen = () => {
             keyExtractor={(data) => data.code}
             renderItem={({ item }) => {
               return (
-                <DataTable.Row style={{ height: 100, paddingHorizontal: 20 }}>
+                <DataTable.Row style={styles.tableRow}>
                   <DataTable.Cell>
-                    <Text style={{ fontSize: 22 }}>{item.code}</Text>
+                    <Text style={styles.tableCell1}>{item.code}</Text>
                   </DataTable.Cell>
-                  <DataTable.Cell style={{ justifyContent: "center" }}>
-                    <Text style={{ fontSize: 18 }}>{item.name}</Text>
+                  <DataTable.Cell style={styles.tableCell2}>
+                    <Text style={styles.tableCell2Text}>{item.name}</Text>
                   </DataTable.Cell>
-                  <DataTable.Cell style={{ justifyContent: "flex-end" }}>
-                    <View style={{ backgroundColor: "red" }}>
-                      <Image
-                        style={{ height: 50, width: 80 }}
-                        source={item.image}
-                      />
+                  <DataTable.Cell style={styles.tableCell3}>
+                    <View style={styles.imageContainer}>
+                      <Image style={styles.imageProp} source={item.image} />
                     </View>
                   </DataTable.Cell>
                 </DataTable.Row>
@@ -137,5 +108,56 @@ const CountryCodeScreen = () => {
     </View>
   );
 };
+
+const styles = StyleSheet.create({
+  viewContainer: {
+    margin: 20,
+  },
+  errorText: {
+    marginBottom: 20,
+    textAlign: "center",
+    color: "white",
+    backgroundColor: "rgba(202, 39, 7, 0.8)",
+  },
+  totalText: {
+    textAlign: "right",
+  },
+  tableContainer: {
+    borderWidth: 1,
+    borderColor: "gray",
+  },
+  tableHeaderTitle1: {
+    fontSize: 16,
+  },
+  tableHeaderTitle2: {
+    fontSize: 18,
+  },
+  tableHeaderTitle3: {
+    fontSize: 18,
+  },
+  tableRow: {
+    height: 100,
+    paddingHorizontal: 20,
+  },
+  tableCell1: {
+    fontSize: 22,
+  },
+  tableCell2: {
+    justifyContent: "center",
+  },
+  tableCell2Text: {
+    fontSize: 18,
+  },
+  tableCell3: {
+    justifyContent: "flex-end",
+  },
+  imageContainer: {
+    backgroundColor: "red",
+  },
+  imageProp: {
+    height: 50,
+    width: 80,
+  },
+});
 
 export default CountryCodeScreen;
