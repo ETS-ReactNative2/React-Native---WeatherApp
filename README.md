@@ -13,7 +13,7 @@ This application uses a number of open source projects to work properly:
 
 - [React Native] - Javascript framework to create mobile application..
 - [Expo] -  open-source platform for making universal native apps for Android, iOS, and the web with JavaScript and React.
-- [CoinGecko] - The data shown in the appilcation is received through OpenWeatherAPI API..
+- [OpenWeather] - The data shown in the appilcation is received through OpenWeatherAPI API..
 - [React-native-paper] - Paper is a collection of customizable and production-ready components for React Native, following Google's Material Design guidelines.
 
 And of course this application itself is open source with every code available here in github.
