@@ -33,11 +33,6 @@ const MoreScreen = ({ navigation }) => {
         title="All Countries"
         description="Get the weather info of all countries"
         left={(props) => <List.Icon {...props} icon="cellphone-screenshot" />}
-        right={(props) => (
-          <Badge size={25} style={{ backgroundColor: "yellow" }}>
-            Beta
-          </Badge>
-        )}
       />
       <List.Item
         onPress={submitHandler}

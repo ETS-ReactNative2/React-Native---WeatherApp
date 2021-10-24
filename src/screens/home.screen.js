@@ -31,7 +31,7 @@ export default function HomeScreen() {
 
   return (
     <>
-      <StatusBar style="light" />
+      <StatusBar barStyle="dark" />
       <View style={{ height: windowHeight - 50, width: windowWidth }}>
         <ImageBackground
           style={{ flex: 1 }}

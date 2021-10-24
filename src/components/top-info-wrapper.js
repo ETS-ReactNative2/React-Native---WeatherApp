@@ -51,7 +51,9 @@ const TopInfoWrapper = ({ location, allCountries = false, item = null }) => {
               resizeMode="contain"
               source={{
                 uri: allCountries
-                  ? `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+                  ? item
+                    ? `http://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`
+                    : icon
                   : icon,
               }}
             />

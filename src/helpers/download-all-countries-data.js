@@ -4,7 +4,7 @@ import { calculateMonthFromNumber } from "./calculate-month-from-number";
 import { calculateWeekFromNumberNativeOnly } from "./calculate-week-from-number";
 
 //Add your API key below
-const baseURL = `https://api.openweathermap.org/data/2.5/weather?appid=<ADDYOURAPIKEY>8e&units=metric&q=`;
+const baseURL = `https://api.openweathermap.org/data/2.5/weather?appid=<YOURAPIKEY>&units=metric&q=`;
 
 const WeatherForecastRequest = async (city, country) => {
   try {
@@ -55,18 +55,21 @@ export const getAllWeather = (
   setAllWeatherCountries,
   setVisible
 ) => {
-  let tempResult = [];
   let i = 0;
+  let allCountriesResults = [];
   const timer = setInterval(async () => {
     if (i < countriesData.length) {
       console.log(i);
-      const result = await WeatherForecastRequest(countriesData[i].name);
-      tempResult.push(result);
+      const results = await WeatherForecastRequest(countriesData[i].name);
+      allCountriesResults.push(results);
       setProgress(i / countriesData.length);
       i++;
     } else {
       clearInterval(timer);
-      setAllWeatherCountries(tempResult);
+      const formattedResults = allCountriesResults.filter(
+        (country) => country !== null
+      );
+      setAllWeatherCountries(formattedResults);
       setVisible(false);
     }
   }, 2000);
