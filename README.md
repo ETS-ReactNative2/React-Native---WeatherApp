@@ -51,8 +51,8 @@ npm start
 - Weather details of over 200 countries available. 
 - User has to swipe right in order to access the details.
 (Note: For demonstration purpose, only two screenshots are being shown.)
-![All Countries Weather](./screenshots/6.png "All Countries Weather")
--![All Countries Weather type2](./screenshots/7.png "All Countries Weather type2")
+- ![All Countries Weather](./screenshots/6.png "All Countries Weather")
+  ![All Countries Weather type2](./screenshots/7.png "All Countries Weather type2")
 
 ## Development
 
